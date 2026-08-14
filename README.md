@@ -1,68 +1,54 @@
 # StoryBook
 
-A premium reader community for discovering books, sharing reviews, building reading habits and connecting around stories.
+A premium, lightweight reading discovery app for finding books, saving favorites and sharing thoughtful reviews.
 
 ## Stack
 
-- Next.js 16 App Router + React + TypeScript
+- Next.js App Router + React + TypeScript
 - Tailwind CSS v4
-- Lucide icons + Sonner notifications
-- Supabase Postgres, Auth, RLS, SSR sessions and Storage-ready architecture
-- Vercel deployment target
+- Lucide icons
+- Sonner notifications
+- Browser `localStorage` for personal saves and reviews
+- Vercel-ready deployment
 
-Next.js provides the full-stack React application layer. Supabase provides Postgres, Auth and row-level authorization. The app uses the modern `@supabase/ssr` package for browser/server clients and a Next.js `proxy.ts` session refresh path.
+## Why this architecture?
 
-## Local setup
+StoryBook intentionally has **no complicated backend**. The current product is a polished client-side MVP: users can search and filter books, save books, like reviews and publish reviews without accounts, databases or API keys.
 
-1. Install Node.js 20.9+.
-2. Copy `.env.example` to `.env.local`.
-3. Create a Supabase project.
-4. In Supabase SQL Editor, run `supabase/schema.sql`.
-5. Run `supabase/migrations/001_hardening.sql`.
-6. Add your project URL and publishable key to `.env.local`.
-7. Run `npm install`.
-8. Run `npm run dev`.
-9. Open `http://localhost:3000`.
+Personal data is stored locally on the device. This keeps the project simple, cheap to host and easy to develop on a phone.
 
-## Supabase environment
+## Run locally
 
-`NEXT_PUBLIC_SUPABASE_URL`
-`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+1. Install Node.js 20+.
+2. Run `npm install`.
+3. Run `npm run dev`.
+4. Open `http://localhost:3000`.
 
-Never put a Supabase secret/service-role key in browser code. The supplied schema enables Row Level Security and limits mutations to the authenticated owner where appropriate.
+## Product
 
-## Product modules
+- Editorial landing page
+- Curated book discovery
+- Instant search
+- Genre filters
+- Book detail modal
+- Personal save/library interactions
+- Community review feed
+- Like interactions
+- Review composer
+- Reading streak/challenge section
+- Responsive mobile navigation
+- Premium editorial visual system
+- No account required
+- No environment variables required
 
-- Discover: instant search, genre filters, ratings and curated book cards
-- Community: reviews, likes, comment-ready discussions and social activity
-- Library: Want to Read, Reading, Finished and Favorites shelves
-- Challenges: reading goals, progress and badges
-- Profiles: public identity, bio, avatar and activity model
-- Notifications: social activity and moderation model
-- Moderation: report workflow and roles in the database model
-- UX: responsive mobile navigation, skeleton loading, error recovery and premium dark/glass UI
-- Production: TypeScript, environment hygiene, RLS, SSR auth refresh and CI build checks
+## Design direction
 
-## Architecture
-
-`app/` contains the App Router UI.
-`lib/supabase/client.ts` is the browser client.
-`lib/supabase/server.ts` is the cookie-aware server client.
-`lib/supabase/proxy.ts` and `proxy.ts` refresh Supabase sessions safely.
-`supabase/schema.sql` contains the database, relationships, indexes, triggers, seed data and RLS policies.
-`supabase/migrations/001_hardening.sql` adds ownership defaults and uniqueness hardening.
+StoryBook uses a warm editorial palette, oversized typography, book-inspired compositions, subtle glass effects, generous whitespace, tactile rounded surfaces and restrained motion. The goal is to feel closer to a premium culture/editorial product than a generic library dashboard.
 
 ## Deployment
 
-Import the repository into Vercel, set the two `NEXT_PUBLIC_SUPABASE_*` environment variables for Production/Preview as needed, and deploy. Vercel has first-class Next.js support. After deployment, set the production Site URL and allowed redirect URLs in Supabase Auth settings. Environment-variable changes require a redeploy.
+The app can be deployed directly to Vercel or any platform that supports Next.js. No database configuration or secret environment variables are required.
 
-## Next product layer
+## Future, only if needed
 
-- Dedicated `/books/[id]` and `/u/[username]` routes
-- Realtime community notifications using Supabase Broadcast
-- Supabase Storage for avatars and book covers
-- Admin/moderation dashboard
-- Open-library/Google Books style metadata ingestion
-- Recommendation engine and semantic search with pgvector
-- PWA/offline reading lists
-- Analytics, observability and automated accessibility/e2e tests
+If StoryBook grows into a multi-user social network, a backend can be added later for authentication, cloud profiles, synchronized libraries, comments and realtime notifications. The UI is intentionally designed so that this can happen without rebuilding the product from scratch.

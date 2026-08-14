@@ -1,54 +1,53 @@
 # StoryBook
 
-StoryBook is a lightweight, premium reading platform for discovering books, saving a personal shelf, exploring reviews and building reading habits.
+A premium social reading space for discovering books, building a personal shelf and sharing the ideas that stay with you.
 
-## Rebuilt architecture
+## Stack
 
-- Next.js App Router
-- React + TypeScript
+- Next.js + React + TypeScript
 - Tailwind CSS v4
+- Supabase Auth + PostgreSQL + Row Level Security
+- Framer Motion
 - Lucide icons
-- Browser localStorage for device-local library and community submissions
-- Vercel-ready
+- GitHub Pages static frontend / Vercel-ready deployment
 
-There is deliberately **no database, authentication service, API key or server backend** in this version. The goal is a fast, elegant product that is easy to develop and deploy from any device.
+## Live features
 
-## Routes
+- Four switchable visual themes: Paper, Midnight, Rose and Forest
+- Account creation and sign in
+- Reader profiles
+- Synced reading shelves and progress
+- Book pages with live save/review actions
+- Community reviews, likes and comments
+- Notification center
+- Reading challenges
+- Mobile-first editorial UX
 
-- `/` — editorial landing page
-- `/discover` — searchable book collection and genre filters
-- `/books/[id]` — dedicated book profiles
-- `/community` — reader reviews and reactions
-- `/library` — saved personal shelf
-- `/challenges` — reading goals and progress
-- `/share` — review composer
+## Supabase setup
 
-## UX direction
+1. Create a Supabase project.
+2. Run `supabase/schema.sql` in the SQL editor.
+3. Run `supabase/seed.sql` to add the StoryBook catalog.
+4. Copy `.env.example` to `.env.local` for local development.
+5. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
+6. Configure your Supabase Auth redirect URL for the deployed site.
 
-The redesign treats StoryBook as an editorial culture product rather than a traditional library dashboard: oversized typography, tactile book-cover compositions, warm paper tones, dark ink surfaces, generous whitespace, responsive navigation and focused calls to action.
+The public frontend never needs a service-role key. RLS protects user-owned data.
 
-## Local data
-
-Saved books and submitted reviews use browser `localStorage`. Clearing site data clears the local shelf and submissions. This makes the MVP private, simple and zero-cost to operate.
-
-## Run
+## Local development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Production check:
+## Production checks
 
 ```bash
-npm run typecheck
+npm run lint
 npm run build
 ```
 
-## Deployment
+## Design direction
 
-Import the repository into Vercel and deploy. No environment variables are required.
-
-## Future scaling
-
-If StoryBook eventually needs synchronized accounts, cloud libraries, real comments or realtime activity, a backend can be added behind the current UI without changing the product's core visual architecture.
+StoryBook intentionally feels more like an editorial culture product than a traditional library dashboard: expressive typography, tactile book covers, generous whitespace, soft surfaces, responsive navigation and subtle motion.

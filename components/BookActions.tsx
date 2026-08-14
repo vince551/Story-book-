@@ -1,0 +1,13 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { Bookmark, Check, Loader2, Star } from "lucide-react";
+import { getCurrentUser, publishReview, saveShelf } from "@/lib/storybook";
+
+export default function BookActions({ bookId }: { bookId: string }) {
+ const [signed,setSigned]=useState(false); const [saved,setSaved]=useState(false); const [status,setStatus]=useState<"want_to_read"|"reading"|"finished"|"favorite">("want_to_read"); const [rating,setRating]=useState(5); const [body,setBody]=useState(""); const [busy,setBusy]=useState(false); const [message,setMessage]=useState("");
+ useEffect(()=>{(async()=>{setSigned(!!await getCurrentUser())})()},[]);
+ async function save(){try{setBusy(true);await saveShelf(bookId,status);setSaved(true);setMessage("Added to your synced shelf ✓")}catch(e:any){setMessage(e.message||"Sign in to save this book.")}finally{setBusy(false)}}
+ async function review(){if(!body.trim())return setMessage("Write a few words first.");try{setBusy(true);await publishReview(bookId,rating,body.trim());setBody("");setMessage("Your review is live ✓")}catch(e:any){setMessage(e.message||"Sign in to publish a review.")}finally{setBusy(false)}}
+ return <div className="mt-8"><div className="flex flex-wrap gap-3"><select value={status} onChange={e=>setStatus(e.target.value as any)} className="rounded-full border border-[var(--line)] bg-[var(--card)] px-4 py-3 text-sm font-bold text-[var(--ink)]"><option value="want_to_read">Want to read</option><option value="reading">Currently reading</option><option value="finished">Finished</option><option value="favorite">Favorite</option></select><button onClick={save} disabled={busy} className="share-button rounded-full px-6 py-3.5 text-sm font-bold">{busy?<Loader2 size={15} className="mr-2 inline animate-spin"/>:saved?<Check size={15} className="mr-2 inline"/>:<Bookmark size={15} className="mr-2 inline"/>}{saved?"Saved":"Save to library"}</button></div>{signed&&<div className="paper-card mt-6 p-6"><p className="eyebrow">Your take</p><div className="mt-3 flex gap-1">{[1,2,3,4,5].map(n=><button key={n} onClick={()=>setRating(n)} aria-label={`${n} stars`}><Star size={18} fill={n<=rating?"currentColor":"none"} className={n<=rating?"text-accent":"opacity-20"}/></button>)}</div><textarea value={body} onChange={e=>setBody(e.target.value)} maxLength={5000} placeholder="What stayed with you?" className="mt-4 min-h-28 w-full rounded-2xl border border-[var(--line)] bg-[var(--card)] p-4 text-sm outline-none"/><button onClick={review} disabled={busy} className="share-button mt-3 rounded-full px-5 py-3 text-sm font-bold">Publish review</button></div>}{message&&<p className="mt-3 rounded-2xl bg-accent-soft p-3 text-xs text-accent">{message}</p>}</div>;
+}

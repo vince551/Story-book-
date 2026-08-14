@@ -1,0 +1,13 @@
+export type Book={id:string;title:string;author:string;genre:string;rating:number;reviews:number;pages:number;blurb:string;tone:string;quote:string;year:number};
+export const books:Book[]=[
+{id:"atomic",title:"Atomic Habits",author:"James Clear",genre:"Self-growth",rating:4.8,reviews:1824,pages:320,blurb:"Tiny changes. Remarkable results.",tone:"violet",quote:"Small habits can create remarkable results.",year:2018},
+{id:"things",title:"Things Fall Apart",author:"Chinua Achebe",genre:"African literature",rating:4.9,reviews:2210,pages:209,blurb:"Culture, identity and the cost of pride.",tone:"forest",quote:"The world has no end, and what is good among one people is an abomination with others.",year:1958},
+{id:"deep",title:"Deep Work",author:"Cal Newport",genre:"Productivity",rating:4.6,reviews:987,pages:304,blurb:"Focused success in a distracted world.",tone:"ocean",quote:"A deep life is a meaningful life.",year:2016},
+{id:"alchemist",title:"The Alchemist",author:"Paulo Coelho",genre:"Fiction",rating:4.7,reviews:1420,pages:208,blurb:"Follow the dream. Listen to your heart.",tone:"sunset",quote:"When you want something, all the universe conspires in helping you to achieve it.",year:1988},
+{id:"design",title:"The Design of Everyday Things",author:"Don Norman",genre:"Design",rating:4.7,reviews:763,pages:368,blurb:"A classic guide to human-centered design.",tone:"berry",quote:"Design is really an act of communication.",year:1988},
+{id:"money",title:"The Psychology of Money",author:"Morgan Housel",genre:"Business",rating:4.8,reviews:1106,pages:256,blurb:"Timeless lessons on wealth and behavior.",tone:"ink",quote:"Doing well with money has little to do with how smart you are.",year:2020},
+{id:"start",title:"Start With Why",author:"Simon Sinek",genre:"Business",rating:4.5,reviews:641,pages:256,blurb:"Find the purpose behind meaningful work.",tone:"orange",quote:"People don't buy what you do; they buy why you do it.",year:2009},
+{id:"now",title:"The Power of Now",author:"Eckhart Tolle",genre:"Mindfulness",rating:4.4,reviews:901,pages:236,blurb:"Presence, awareness and a quieter mind.",tone:"teal",quote:"Realize deeply that the present moment is all you have.",year:1997}
+];
+export const genres=["All","Fiction","Self-growth","African literature","Productivity","Design","Business","Mindfulness"];
+export const tones:Record<string,string>={violet:"from-[#21163d] via-[#6040a7] to-[#cdb8ff]",forest:"from-[#102b24] via-[#28624e] to-[#b7c8a5]",ocean:"from-[#10263b] via-[#176b84] to-[#9be4e5]",sunset:"from-[#54251a] via-[#b65b32] to-[#f1c17c]",berry:"from-[#411a36] via-[#8d3e71] to-[#edb0cf]",ink:"from-[#101216] via-[#3d4550] to-[#b8bdc5]",orange:"from-[#54200f] via-[#c25b27] to-[#f1b36b]",teal:"from-[#103f3c] via-[#168276] to-[#b4e0c7]"};

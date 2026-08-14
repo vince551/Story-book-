@@ -1,54 +1,54 @@
 # StoryBook
 
-A premium, lightweight reading discovery app for finding books, saving favorites and sharing thoughtful reviews.
+StoryBook is a lightweight, premium reading platform for discovering books, saving a personal shelf, exploring reviews and building reading habits.
 
-## Stack
+## Rebuilt architecture
 
-- Next.js App Router + React + TypeScript
+- Next.js App Router
+- React + TypeScript
 - Tailwind CSS v4
 - Lucide icons
-- Sonner notifications
-- Browser `localStorage` for personal saves and reviews
-- Vercel-ready deployment
+- Browser localStorage for device-local library and community submissions
+- Vercel-ready
 
-## Why this architecture?
+There is deliberately **no database, authentication service, API key or server backend** in this version. The goal is a fast, elegant product that is easy to develop and deploy from any device.
 
-StoryBook intentionally has **no complicated backend**. The current product is a polished client-side MVP: users can search and filter books, save books, like reviews and publish reviews without accounts, databases or API keys.
+## Routes
 
-Personal data is stored locally on the device. This keeps the project simple, cheap to host and easy to develop on a phone.
+- `/` — editorial landing page
+- `/discover` — searchable book collection and genre filters
+- `/books/[id]` — dedicated book profiles
+- `/community` — reader reviews and reactions
+- `/library` — saved personal shelf
+- `/challenges` — reading goals and progress
+- `/share` — review composer
 
-## Run locally
+## UX direction
 
-1. Install Node.js 20+.
-2. Run `npm install`.
-3. Run `npm run dev`.
-4. Open `http://localhost:3000`.
+The redesign treats StoryBook as an editorial culture product rather than a traditional library dashboard: oversized typography, tactile book-cover compositions, warm paper tones, dark ink surfaces, generous whitespace, responsive navigation and focused calls to action.
 
-## Product
+## Local data
 
-- Editorial landing page
-- Curated book discovery
-- Instant search
-- Genre filters
-- Book detail modal
-- Personal save/library interactions
-- Community review feed
-- Like interactions
-- Review composer
-- Reading streak/challenge section
-- Responsive mobile navigation
-- Premium editorial visual system
-- No account required
-- No environment variables required
+Saved books and submitted reviews use browser `localStorage`. Clearing site data clears the local shelf and submissions. This makes the MVP private, simple and zero-cost to operate.
 
-## Design direction
+## Run
 
-StoryBook uses a warm editorial palette, oversized typography, book-inspired compositions, subtle glass effects, generous whitespace, tactile rounded surfaces and restrained motion. The goal is to feel closer to a premium culture/editorial product than a generic library dashboard.
+```bash
+npm install
+npm run dev
+```
+
+Production check:
+
+```bash
+npm run typecheck
+npm run build
+```
 
 ## Deployment
 
-The app can be deployed directly to Vercel or any platform that supports Next.js. No database configuration or secret environment variables are required.
+Import the repository into Vercel and deploy. No environment variables are required.
 
-## Future, only if needed
+## Future scaling
 
-If StoryBook grows into a multi-user social network, a backend can be added later for authentication, cloud profiles, synchronized libraries, comments and realtime notifications. The UI is intentionally designed so that this can happen without rebuilding the product from scratch.
+If StoryBook eventually needs synchronized accounts, cloud libraries, real comments or realtime activity, a backend can be added behind the current UI without changing the product's core visual architecture.
